@@ -20,13 +20,14 @@ public class Medico {
     @JoinColumn(name = "especialidade_id", nullable = false)
     private Especialidade especialidade;
 
-    @Column(nullable = false)
     private Boolean ativo;
+    private Double valorConsulta;
 
     public Medico() {
     }
 
-    public Medico(String nome, String crm, Especialidade especialidade, Boolean ativo) {
+    public Medico(Long id, String nome, String crm, Especialidade especialidade, Boolean ativo) {
+        this.id = id;
         this.nome = nome;
         this.crm = crm;
         this.especialidade = especialidade;
@@ -67,5 +68,13 @@ public class Medico {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Double getValorConsulta() {
+        return valorConsulta;
+    }
+
+    public void setValorConsulta(Double valorConsulta) {
+        this.valorConsulta = valorConsulta;
     }
 }
