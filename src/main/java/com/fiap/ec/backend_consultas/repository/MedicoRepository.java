@@ -1,9 +1,7 @@
 package com.fiap.ec.backend_consultas.repository;
 
-import com.fiap.ec.backend_consultas.model.Paciente;
+import com.fiap.ec.backend_consultas.model.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface PacienteRepository extends JpaRepository<Paciente, Long> {
+public interface MedicoRepository extends JpaRepository<Medico, Long> {
 }

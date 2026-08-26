@@ -1,31 +1,25 @@
 package com.fiap.ec.backend_consultas.service;
-
-import com.fiap.ec.backend_consultas.model.Especialidade;
-import com.fiap.ec.backend_consultas.model.Paciente;
-import com.fiap.ec.backend_consultas.repository.PacienteRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.fiap.ec.backend_consultas.model.Paciente;
+import com.fiap.ec.backend_consultas.repository.PacienteRepository;
 @Service
 public class PacienteService {
     private final PacienteRepository repository;
-
     public PacienteService(PacienteRepository repository) {
         this.repository = repository;
     }
-
-    public Paciente salvar(Paciente especialidade) {
-        return repository.save(especialidade);
+    public Paciente salvar(Paciente paciente) {
+        return repository.save(paciente);
     }
-
     public List<Paciente> listar() {
         return repository.findAll();
     }
-
     public Paciente buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Especialidade não encontrada"));
+                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
     }
 
     public Paciente atualizar(Long id, Paciente pacienteAtualizado) {
@@ -36,7 +30,6 @@ public class PacienteService {
         pacienteExistente.setTelefone(pacienteAtualizado.getTelefone());
         pacienteExistente.setDataNascimento(pacienteAtualizado.getDataNascimento());
         pacienteExistente.setAtivo(pacienteAtualizado.getAtivo());
-
         return repository.save(pacienteExistente);
     }
 

@@ -1,43 +1,45 @@
 package com.fiap.ec.backend_consultas.service;
 
-import com.fiap.ec.backend_consultas.model.Especialidade;
-import com.fiap.ec.backend_consultas.model.Paciente;
-import com.fiap.ec.backend_consultas.repository.EspecialidadeRepository;
+import com.fiap.ec.backend_consultas.model.Medico;
+import com.fiap.ec.backend_consultas.repository.MedicoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class EspecialidadeService {
-    private final EspecialidadeRepository repository;
+public class MedicoService {
 
-    public EspecialidadeService(EspecialidadeRepository repository) {
+    private final MedicoRepository repository;
+
+    public MedicoService(MedicoRepository repository) {
         this.repository = repository;
     }
 
-    public Especialidade salvar(Especialidade especialidade) {
-        return repository.save(especialidade);
+    public Medico salvar(Medico medico) {
+        return repository.save(medico);
     }
 
-    public List<Especialidade> listar() {
+    public List<Medico> listar() {
         return repository.findAll();
     }
 
-    public Especialidade buscarPorId(Long id) {
+    public Medico buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Especialidade não encontrada"));
+                .orElseThrow(() -> new RuntimeException("Médico não encontrado"));
     }
 
-    public Especialidade atualizar(Long id, Especialidade especialidadeAtualizado) {
-        Especialidade especialidadeExistente = buscarPorId(id);
-        especialidadeExistente.setNome(especialidadeAtualizado.getNome());
-        especialidadeExistente.setDescricao(especialidadeAtualizado.getDescricao());
+    public Medico atualizar(Long id, Medico medico) {
+        Medico existente = buscarPorId(id);
 
-        return repository.save(especialidadeExistente);
+        existente.setNome(medico.getNome());
+        existente.setCrm(medico.getCrm());
+        existente.setEspecialidade(medico.getEspecialidade());
+        existente.setAtivo(medico.getAtivo());
+
+        return repository.save(existente);
     }
 
     public void deletar(Long id) {
-        Especialidade especialidade = buscarPorId(id);
-        repository.delete(especialidade);
+        repository.deleteById(id);
     }
 }
